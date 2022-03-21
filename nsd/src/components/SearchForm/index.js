@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 
 import * as yup from 'yup';
 
+import "../../App.css"
+
 const schema = yup.object().shape({
     query: yup
         .string()
@@ -85,14 +87,13 @@ const SearchForm = () => {
 
     return(
         <form onSubmit={handleSubmit}>
-            <label>
+            <label className="formLabels">
                 Request: 
                 <input name="query" value={formData.query} type="text"  onChange={handleChange} autoFocus/>
             </label>
             <fieldset>
-                Taxonomy:
-                <label>
-                    Dispatch sequences by taxonomic order
+                <label className="formLabels">
+                Taxonomy: dispatch sequences by taxonomic order
                     <select name="taxonomy" value={formData.taxonomy} onChange={handleChange} >
                         <option value="1" default >no dispatch</option> 
                         <option value="2">Kingdom</option>
@@ -100,7 +101,7 @@ const SearchForm = () => {
                         <option value="4">Custom</option>
                     </select>
                     {formData.taxonomy === "4" && 
-                    <label>
+                    <label className="formLabels">
                         Enter a taxon to filter files
                         <input name="taxon" value={formData.taxon} type="text" onChange={handleChange} />
                     </label>
@@ -108,24 +109,23 @@ const SearchForm = () => {
                 </label>
             </fieldset>
             <fieldset name="output">
-                <label>
+                <label className="formLabels">
                     fasta
                     <input name="fasta" onChange={handleChange} type="checkbox" checked={formData.fasta} />
-                </label>
-                <label>
+
                     csv
                     <input name="csv" onChange={handleChange} type="checkbox" checked={formData.csv? true:false} />
                 </label>
             </fieldset>
-            <label>
+            <label className="formLabels">
                 Input file: input one or more .txt file as an external list of
                 <input name="inputFile" value={formData.inputFile} type="file" accept=".txt, text/plain" onChange={handleChange} />
             </label>
-            <label>
+            <label className="formLabels">
                 filter
                 <input name="filter" value={formData.filter} type="text" onChange={handleChange} />
             </label>
-            <label>
+            <label className="formLabels">
             add the taxonomic information in the information line of the output files
                 <input name="information" type="checkbox" onChange={handleChange} checked={formData.information}/>
             </label>

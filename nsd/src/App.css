@@ -2,37 +2,61 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* 
+########################################################################
+
+forms
+
+########################################################################
+*/
+
+fieldset {
+  border: none;
+  padding: 0;
+  width: 100%;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+
+form {
+  border: 2px solid grey;
+  border-radius: 10px;
+  padding: 3vh 3vw;
+  margin: auto;
+  width: 80%;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+form p{
+  font-size: 1.2vw;
+  color: red;
+}
+
+input{
+  background: rgba(100, 164, 204, 0.2);
+  border-radius: 1.3vw;
+  font-family: 'lato';
+  margin-left: 4%;
+  padding: 2%;
+}
+
+.formLabels {
   display: flex;
-  flex-direction: column;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  width: 100%;
 }
 
-.App-link {
-  color: #61dafb;
+.formLabels label, .formLabels input{
+  text-align: left;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.formLabels input[type=text]{
+  width: 80%;
 }
+.formLabels input[type=checkbox]{
+
+  padding-right: 25%
+}
+
+
+
