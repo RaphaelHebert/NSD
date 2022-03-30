@@ -41,7 +41,7 @@ const baseform = {
     information: false,
 }
 
-const SearchForm = () => {
+const SearchForm = ({ AddDownload }) => {
     const [formData, setFormData] = useState(baseform)
     const [formErrors, setFormErrors] = useState(baseform)
     const [ disable, setDisable ] = useState(true)
@@ -96,8 +96,9 @@ const SearchForm = () => {
     }
 
     const handleSubmit = e => {
-        // e.target.type === 
         e.preventDefault()
+        AddDownload(formData)
+        setFormData(baseform)
     }
 
     useEffect(() => {
