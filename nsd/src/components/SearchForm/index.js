@@ -26,7 +26,6 @@ const schema = yup.object().shape({
         .string(),
     information:yup
         .string()
-        .required("a query is required"),
 })
 
 
@@ -48,23 +47,43 @@ const SearchForm = () => {
     const [ disable, setDisable ] = useState(true)
 
     const handleFormError = (name, value) => {
-        console.log("handleFormError", name , value)
-        yup.reach(schema, name).validate(value)
+        //handle format checkboxes
+        console.log(name, value)
+        if(name === "fasta" && !value){
+            !formData.csv &&
+            setFormErrors({
+                ...formErrors,
+                format: "at least one output format must be selected."
+            })
+        }else if(name === "csv" && !value){
+            !formData.fasta &&
+            setFormErrors({
+                ...formErrors,
+                format: "at least one output format must be selected."
+            })
+        }else if(name === "fasta" || name === "csv"){
+            setFormErrors({
+                ...formErrors,
+                format: ""
+            })
+        } else {
+            //other errors
+            yup.reach(schema, name).validate(value)
             .then(() => {
-                console.log("handleFormError: ok")
                 setFormErrors({
                     ...formErrors,
                     [name]: ''
                 })
             })
             .catch(err => {
-                console.log("handleFormError: error")
                 setFormErrors({
                     ...formErrors,
-                    [name]: err.errors[0]
+                    [name]: err.message
                 })
             })
+        }
     }
+    
 
     const handleChange = e => {
         const {type, name, value } = e.target
@@ -76,40 +95,23 @@ const SearchForm = () => {
         handleFormError(name, valueToPass)
     }
 
-   
-
     const handleSubmit = e => {
         // e.target.type === 
         e.preventDefault()
     }
 
-    const setFormatError = (reset) => {
-        reset?
-        setFormErrors({
-            ...formErrors,
-            format: ""
-        }):
-        setFormErrors({
-            ...formErrors,
-            format: "at least one output format must be selected."
-        })
-    }
     useEffect(() => {
         schema.isValid(formData)
-            .then(valid => {
-                formData["fasta"] || formData["csv"]?
-                setFormatError(true) &&
-                setDisable(!valid):
-                setFormatError(false)
-            })
+            .then(valid => setDisable(!valid))
     }, [formData])
 
     return(
         <form onSubmit={handleSubmit}>
             <label className="formLabels formField">
                 Request: 
-                <input className="formElement" name="query" value={formData.query} type="text"  onChange={handleChange} autoFocus/>
+                <input className="formElement" name="query" value={formData.query} type="text" onChange={handleChange} autoFocus/>
             </label>
+            <p>{formErrors.query}</p>
             <fieldset className="formLabels formField">
                 <label className="flexCol">
                 Dispatch sequences by taxonomic order
