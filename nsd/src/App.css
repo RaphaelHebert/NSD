@@ -30,12 +30,12 @@ form p{
   color: red;
 }
 
-input{
+.formElement{
   background: rgba(100, 164, 204, 0.2);
-  border-radius: 1.3vw;
+  border-radius: .3vw;
   font-family: 'lato';
-  margin-left: 4%;
-  padding: 2%;
+  margin-left: 1%;
+  padding: .5vw;
 }
 
 .formLabels {
@@ -43,7 +43,13 @@ input{
   flex-flow: row nowrap;
   justify-content: flex-start;
   align-items: center;
+  padding-bottom: 2vh;
   width: 100%;
+}
+
+.formField {
+  margin-bottom: 5vh;
+  border-bottom: 2px dashed grey;
 }
 
 .formLabels label, .formLabels input{
@@ -53,10 +59,29 @@ input{
 .formLabels input[type=text]{
   width: 80%;
 }
-.formLabels input[type=checkbox]{
 
+.formLabels input[type=checkbox]{
   padding-right: 25%
 }
 
+label > select {
+  margin: 1.5% 0;
+}
 
+.taxonInput {
+  padding: 0;
+}
+.taxonInput input {
+  width: 10%;
+}
 
+label {
+  padding-left: 1.5%;
+}
+
+.flexCol {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
